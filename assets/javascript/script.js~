@@ -1,0 +1,86 @@
+// declare variables
+var weapons = ["rock", "paper", "scissors"];
+var hashGen = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var player1 =  false;
+var player2 = false;
+var player1Choose = false;
+var player2Choose = false;
+var hasKey = false;
+// var to ref database
+var database = firebase.database();
+
+$(document).ready(function() {
+    // modal to start new game session
+    $("#startModal").modal({backdrop: true});
+    
+    // start game function
+    function startNewGame() {
+	// save info to database
+	// push new session to create key
+	// set each player with wins loss and name
+	// use update to adjust counters
+	var newGame = newGame.push();
+	var players = database.ref("players/");
+	players.set({
+	    player1: {
+		name: "",
+		wins: 0,
+		losses: 0,
+		choice: ""
+	    },
+	    player2: {
+		name: "",
+		wins: 0,
+		losses: 0,
+		choice: ""
+	    }
+	});
+	// add key to hash
+	location.hash = newGame.key();
+	hasKey = true;
+    }
+
+    // update firebase auto
+    database.ref().on("child_changed", function(data) {
+	console.log(data.val());
+	$("#P1").html(data.val().player1.name);
+	$("#P2").html(data.val().player2.name);
+	
+    }, function(errorObject) {
+	console.log("The read failed: " + errorObject.code);
+    }); 
+    
+
+    // start click function
+    $("#start").on("click", function() {
+	startNewGame();
+    });
+    // submit name function
+    $("#submit").on("click", function() {
+	event.preventDefault();
+	if (!player1 && !player2) {  
+	    // save name to database
+	    database.ref().child(players.player1).update({
+		name: $("#playerName").val().trim()
+	    });
+	    $("#playerName").val("");
+	    player1 = true;
+	} else if (player1 && !player2) {
+	    player2 = true;
+	    // save name to database
+	    database.ref().child(players.player2).update({
+		name: $("#playerName").val().trim()
+	    });
+	    $("#playerName").val("");
+	    $("form").hide();
+	}
+
+    });
+
+
+
+    // play game funtion
+    // each player chooses weapon
+    // check who wins, tell players, adjust counters
+
+}); // close ready function

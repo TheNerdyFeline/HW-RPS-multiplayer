@@ -1,0 +1,78 @@
+<!DOCTYPE>
+<html lang="en">
+    <head>
+	<meta charset="UTF-8">
+	<title>RPS Game</title>
+	<!-- veiwport info for media query -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- jquery link -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!-- boostrap jquery link -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- bootstrap link -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css">	
+    </head>
+    <body>
+	<div class="container">
+	  <div class="modal fade" id="startModal">
+	     <div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			    <h5 class="modal-title">Rock Paper Scissors</h5>
+			</div>
+			<div class="modal-body">
+			    <p>Click to start new game. To add a friend, after clikcing start send them a copy of the url.</p>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-primary" id="start">Start New Game</button>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    <div class="row row1">
+		<h1>Rock Paper Scissors... choose your weapon!</h1>
+	    </div>
+	    <div class="row row2">
+	    <div class="col-sm-3" id="player1">
+		<h3 id="P1"></h3>
+		<h3 id="choice1"></h3>
+		<div class="choices1"></div>
+		<p>Wins: <span id="wins1"></span>Losses: <span id="loss1"></span></p>
+	    </div> <!-- close player 1 -->
+	    <div class="col-sm-3 col-sm-offset-1" id="update"><span id="result"></span></div>
+	    <div class="col-sm-3 col-sm-offset-3" id="player2">
+		<h3 id="P2"></h3>
+		<h3 id="choice2"></h3>
+		<div class="choices2"></div>
+		<p>Wins: <span id="wins2"></span>Losses: <span id="loss2"></span></p>
+	    </div>
+	    </div> <!-- close row2 -->
+	    <div class="row row 3">
+	    <form class="name">
+		<input type="text" id ="playerName" name="player" placeholder="Player Name">
+		<input type="submit" value="Submit" id="submit">
+	    </form>
+	    </div> <!-- close row3 -->
+	    <div class="row row4">
+	    <div class="chatRoom"></div>
+	    </div> <!-- close row4 -->
+	</div> <!-- close container -->
+	
+
+	<!-- firbase link -->
+	<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+	<script>
+	 // Initialize Firebase
+	 var config = {
+	     apiKey: "AIzaSyDzT0rWo7NGHJzaWtZTASMYNP-yk3ibPVY",
+	     authDomain: "rps-game-99441.firebaseapp.com",
+	     databaseURL: "https://rps-game-99441.firebaseio.com",
+	     storageBucket: "rps-game-99441.appspot.com",
+	     messagingSenderId: "63339340436"
+	 };
+	 firebase.initializeApp(config);
+	</script>
+	<script src="assets/javascript/script.js" type="text/javascript"></script>
+    </body>
+</html>

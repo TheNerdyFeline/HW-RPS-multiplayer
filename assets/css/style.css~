@@ -1,0 +1,31 @@
+body {
+
+}
+
+.container {
+    display: block;
+    margin: auto;
+    width: 60em;
+    background: #E94117; 
+}
+
+.col-sm-3 {
+    
+}
+/*
+//#startModal {
+    display: block;
+    margin: auto;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%
+    background: black;
+    opacity: 0.5;
+}
+*/
+.modal-content {
+    position: relative;
+    margin: auto;
+    width: 50em;
+}

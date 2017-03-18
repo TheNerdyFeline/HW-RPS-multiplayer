@@ -1,0 +1,21 @@
+body {
+
+}
+
+.container {
+    display: block;
+    margin: auto;
+    width: 60em;
+    background: #E94117; 
+}
+
+.col-sm-3 {
+    
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    transform: translate(-10%, 60%)
+    width: 50em;
+}
