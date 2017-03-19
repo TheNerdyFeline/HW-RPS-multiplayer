@@ -93,67 +93,48 @@ $(document).ready(function() {
 	}
     } // close chooseWeapon
 
+    
+    // check who wins, tell players, adjust counters
     function gamePlay() {
 	if(player1Choose && player2Choose){
 	    database.ref(key + "/players/player1").update({choice: player1Choice});
 	    database.ref(key + "/players/player2").update({choice: player2Choice});
-	    
-	    switch(player1Choice) {
-	    case 'rock' :
-		switch(player2Choice) {
-		case 'rock':
-		    $("#result").text("You both picked rock! Tie!");
-
-		case 'paper':
+	    if (player1Choice === player2Choice){
+		$("#result").text("Tie!");
+	    } else if (player1Choice === "rock"){
+		if (player2Choice === "paper") {
 		    $("#result").text(p2Name +  " wins!");
 		    p2IncWins();
 		    p1IncLoss();
-
-
-		case 'scissors':
+		} else if (player2Choice === "scissors") {
 		    $("#result").text(p1Name + " wins!");
 		    p1IncWins();
 		    p2IncLoss();
-		    
 		}
-		break;
 		
-	    case 'paper' :
-		switch(player2Choice) {
-		case 'rock':
-		    $("#result").html(p1Name + " wins!");
-		    p1IncWins();
-		    p2IncLoss();
-
-		case 'paper':
-		    $("#result").html("You both picked paper! Tie!");
-
-		case 'scissors':
-		    $("#result").html(p2Name +  " wins!");
+	    } else if (player1Choice === "paper"){
+		if (player2Choice === "scissors") {
+		    $("#result").text(p2Name +  " wins!");
 		    p2IncWins();
 		    p1IncLoss();
-		    
-		}
-		break;
-
-	    case 'scissors' :
-		switch(player2Choice) {
-		case 'rock':
-		    $("#result").html(p2Name +  " wins!");
-		    p2IncWins();
-		    p1IncLoss();
-		    
-		case 'paper':
-		    $("#result").html(p1Name + " wins!");
+		} else if (player2Choice === "rock") {
+		    $("#result").text(p1Name + " wins!");
 		    p1IncWins();
 		    p2IncLoss();
-
-		case 'scissors':
-		    $("#result").html("You both picked scissors! Tie!");
-		    
 		}
-		break;
+		
+	    } else if (player1Choice === "scissors"){
+		if (player2Choice === "rock") {
+		    $("#result").text(p2Name +  " wins!");
+		    p2IncWins();
+		    p1IncLoss();
+		} else if (player2Choice === "paper") {
+		    $("#result").text(p1Name + " wins!");
+		    p1IncWins();
+		    p2IncLoss();
+		}
 	    }
+	   
 	    player1Choose = false;
 	    player2Choose = false;
 	    setTimeout (function() {
@@ -163,12 +144,11 @@ $(document).ready(function() {
 
     } // close gamePlay
 
-    var p1Wins = database.ref(key + "/players/player1/").child('win');
-    var p2Wins = database.ref(key + "/players/player2/").child('wins');
-    var p1Loss = database.ref(key + "/players/player1/").child('losses');
-    var p2Loss = database.ref(key + "/players/player2/").child('losses');
+    
 
+    // change counters
     function p1IncWins() {
+	var p1Wins = database.ref(key + "/players/player1/wins");
 	p1Wins.transaction(function(currentWins) {
 	    return currentWins+1;
 	});
@@ -176,6 +156,7 @@ $(document).ready(function() {
     };
 
     function p2IncWins() {
+	var p2Wins = database.ref(key + "/players/player2/wins");
 	p2Wins.transaction(function(currentWins){
 	    return currentWins+1;
 	});
@@ -183,6 +164,7 @@ $(document).ready(function() {
     };
 
     function p1IncLoss() {
+	var p1Loss = database.ref(key + "/players/player1/losses");
 	p1Loss.transaction(function(currentLoss){
 	    return currentLoss+1;
 	});
@@ -190,6 +172,7 @@ $(document).ready(function() {
     };
 
     function p2IncLoss() {
+	var p2Loss = database.ref(key + "/players/player2/losses");
 	p2Loss.transaction(function(currentLoss){
 	    return currentLoss+1;
 	});
@@ -242,12 +225,6 @@ $(document).ready(function() {
 	gamePlay();
 	$(".choices2").empty();
 
-    });
-
-    
-
-    // play game funtion
-    // each player chooses weapon
-    // check who wins, tell players, adjust counters
+    });  
 
 }); // close ready function
